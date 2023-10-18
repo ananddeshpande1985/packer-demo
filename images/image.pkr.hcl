@@ -1,9 +1,8 @@
 # Copyright (c) HashiCorp, Inc.
 # SPDX-License-Identifier: MPL-2.0
 
-variable "region" {
-  type    = string
-  default = "ap-south-1"
+source "null" "example" {
+    communicator = "none"
 }
 
 locals { timestamp = regex_replace(timestamp(), "[- TZ:]", "") }
@@ -15,9 +14,9 @@ locals { timestamp = regex_replace(timestamp(), "[- TZ:]", "") }
 
 source "amazon-ebs" "hashicorpdemo" {
   assume_role {
-    role_arn     = "arn:aws:iam::635948890580:role/packer"
-    session_name = "packer"
-    external_id  = "packer"
+    role_arn     = "${var.role_arn}"
+    session_name = "${var.session_name}"
+    external_id  = "${var.external_id}"
   }
 
   ami_name      = "hashicorpdemo-${local.timestamp}"

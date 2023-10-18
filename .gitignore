@@ -16,4 +16,4 @@ crash.log
 *.box
 *tf-packer*
 **instances
-
+*images/variable.pkr.hcl
